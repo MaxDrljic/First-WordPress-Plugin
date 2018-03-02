@@ -32,6 +32,14 @@ Copyright 2005-2015 Automattic, Inc.
 
 defined( 'ABSPATH' ) or die( 'Hey, you can\t access this file, run away!' );
 
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+  require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
 if ( !class_exists( 'MaxPlugin' ) ) {
 
   class MaxPlugin
@@ -80,20 +88,17 @@ if ( !class_exists( 'MaxPlugin' ) ) {
     }
 
     function activate() {
-      require_once plugin_dir_path( __FILE__ ) . 'inc/max-plugin-activate.php';
-      MaxPluginActivate::activate();
+      Activate::activate();
     }
   }
 
     $maxPlugin = new MaxPlugin();
     $maxPlugin->register();
 
-
   // activation
   register_activation_hook( __FILE__, array( $maxPlugin, 'activate' ) );
 
   // deactivation
-  require_once plugin_dir_path( __FILE__ ) . 'inc/max-plugin-deactivate.php';
-  register_deactivation_hook( __FILE__, array( 'MaxPluginDeactivate', 'deactivate' ) );
+  register_deactivation_hook( __FILE__, array( 'Deactivate', 'deactivate' ) );
 
 }
