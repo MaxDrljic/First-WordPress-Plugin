@@ -1,0 +1,14 @@
+{
+    "name": "max/max-plugin",
+    "description": "My first plugin development",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "MaxDrljic",
+            "email": "max_spree@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
