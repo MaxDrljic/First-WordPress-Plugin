@@ -30,14 +30,38 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright 2005-2015 Automattic, Inc.
 */
 
+// If this file is called direactly, abort!
 defined( 'ABSPATH' ) or die( 'Hey, you can\t access this file, run away!' );
 
+// Require once the Composer Autoload
 if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
   require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
+// Define CONSTANTS
 define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'PLUGIN', plugin_basename( __FILE__ ) );
+
+use Inc\Base\Activate;
+use Inc\Base\Deactivate;
+
+/**
+ * The code that runs during plugin activation
+ */
+function activate_max_plugin() {
+  Activate::activate();
+}
+
+/**
+ * The code that runs during plugin deactivation
+ */
+function deactivate_max_plugin() {
+  Deactivate::deactivate();
+}
+
+register_activation_hook( __FILE__, 'activate_max_plugin' );
+register_deactivation_hook( __FILE__, 'deactivate_max_plugin' );
 
 if ( class_exists( 'Inc\\Init' ) ) {
   Inc\Init::register_services();
