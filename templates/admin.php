@@ -1,1 +1,1 @@
-<h1>Max Plugin</h1>
+<h1>Max Plugin Required</h1>
