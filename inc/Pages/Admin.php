@@ -31,6 +31,10 @@ class Admin extends BaseController
 
     $this->setSubpages();
 
+    $this->setSettings();
+    $this->setSections();
+    $this->setFields();
+
     $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
   }
 
@@ -77,5 +81,51 @@ class Admin extends BaseController
         'callback' => function() { echo '<h1>Widgets Manager</h1>'; },
       )
     );
+  }
+
+  public function setSettings()
+  {
+    $args = array(
+      array(
+        'option_group' => 'max_options_group',
+        'option_name' => 'text_example',
+        'callback' => array( $this->callbacks, 'maxOptionsGroup' )
+      )
+    );
+
+    $this->settings->setSettings( $args );
+  }
+
+  public function setSections()
+  {
+    $args = array(
+      array(
+        'id' => 'max_admin_index',
+        'title' => 'Settings',
+        'callback' => array( $this->callbacks, 'maxAdminSection' ),
+        'page' => 'max_plugin'
+      )
+    );
+
+    $this->settings->setSections( $args );
+  }
+
+  public function setFields()
+  {
+    $args = array(
+      array(
+        'id' => 'text_example',
+        'title' => 'Text Example',
+        'callback' => array( $this->callbacks, 'maxTextExample' ),
+        'page' => 'max_plugin',
+        'section' => 'max_admin_index',
+        'args' => array(
+          'label_for' => 'text_example',
+          'class' => 'example-class'
+        )
+      )
+    );
+
+    $this->settings->setFields( $args );
   }
 }

@@ -21,6 +21,10 @@ class SettingsApi
     if ( ! empty($this->admin_pages) ) {
       add_action( 'admin_menu', array( $this, 'addAdminMenu' ) );
     }
+
+    if ( !empty($this->settings) ) {
+      add_action( 'admin_init', array( $this, 'registerCustomFields' ) );
+    }
   }
 
   public function addPages( array $pages )

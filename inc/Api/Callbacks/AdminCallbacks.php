@@ -12,4 +12,20 @@ class AdminCallbacks extends BaseController
   {
     return require_once( "$this->plugin_path/templates/admin.php" );
   }
+
+  public function maxOptionsGroup( $input )
+  {
+    return $input;
+  }
+
+  public function maxAdminSection()
+  {
+    echo 'Check this beautiful section!';
+  }
+
+  public function maxTextExample()
+  {
+    $value = esc_attr( get_option( 'text_example' ) );
+    echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="Write Something Here!" />';
+  }
 }
