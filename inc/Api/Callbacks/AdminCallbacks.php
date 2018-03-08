@@ -28,4 +28,10 @@ class AdminCallbacks extends BaseController
     $value = esc_attr( get_option( 'text_example' ) );
     echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="Write Something Here!" />';
   }
+
+  public function maxFirstName()
+  {
+    $value = esc_attr( get_option( 'first_name' ) );
+    echo '<input type="text" class="regular-text" name="text_example" value="' . $value . '" placeholder="Write Your First Name!" />';
+  }
 }

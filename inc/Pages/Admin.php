@@ -90,6 +90,10 @@ class Admin extends BaseController
         'option_group' => 'max_options_group',
         'option_name' => 'text_example',
         'callback' => array( $this->callbacks, 'maxOptionsGroup' )
+      ),
+      array(
+        'option_group' => 'max_options_group',
+        'option_name' => 'first_name',
       )
     );
 
@@ -117,6 +121,17 @@ class Admin extends BaseController
         'id' => 'text_example',
         'title' => 'Text Example',
         'callback' => array( $this->callbacks, 'maxTextExample' ),
+        'page' => 'max_plugin',
+        'section' => 'max_admin_index',
+        'args' => array(
+          'label_for' => 'text_example',
+          'class' => 'example-class'
+        )
+      ),
+      array(
+        'id' => 'first_name',
+        'title' => 'First Name',
+        'callback' => array( $this->callbacks, 'maxFirstName' ),
         'page' => 'max_plugin',
         'section' => 'max_admin_index',
         'args' => array(
