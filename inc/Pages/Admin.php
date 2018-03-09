@@ -59,7 +59,7 @@ class Admin extends BaseController
       array(
         'parent_slug' => 'max_plugin',
         'page_title' => 'Custom Post Types',
-        'menu_title' => 'Max',
+        'menu_title' => 'CPT',
         'capability' => 'manage_options',
         'menu_slug' => 'max_cpt',
         'callback' => function() { echo '<h1>CPT Manager</h1>'; }
