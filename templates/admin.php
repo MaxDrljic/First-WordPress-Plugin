@@ -13,7 +13,7 @@
 
       <form method="post" action="options.php">
       <?php
-        settings_fields( 'max_options_group' );
+        settings_fields( 'max_plugin_settings' );
         do_settings_sections( 'max_plugin' );
         submit_button();
       ?>

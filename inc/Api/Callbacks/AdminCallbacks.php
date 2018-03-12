@@ -13,7 +13,7 @@ class AdminCallbacks extends BaseController
     return require_once( "$this->plugin_path/templates/admin.php" );
   }
 
-  public function maxOptionsGroup( $input )
+  /* public function maxOptionsGroup( $input )
   {
     return $input;
   }
@@ -21,7 +21,7 @@ class AdminCallbacks extends BaseController
   public function maxAdminSection()
   {
     echo 'Check this beautiful section!';
-  }
+  } */
 
   public function maxTextExample()
   {
