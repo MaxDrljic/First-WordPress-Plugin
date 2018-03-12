@@ -1,25 +1,2 @@
-window.addEventListener("load", () => {
-
-  // Store tabs variables
-  let tabs = document.querySelectorAll("ul.nav-tabs > li");
-
-  for (i = 0; i < tabs.length; i++) {
-    tabs[i].addEventListener("click", switchTab);
-  }
-
-  function switchTab(e) {
-    e.preventDefault();
-
-    document.querySelector("ul.nav-tabs li.active").classList.remove("active");
-    document.querySelector(".tab-pane.active").classList.remove("active");
-
-    let clickedTab = e.currentTarget;
-    let anchor = e.target;
-    let activePaneID = anchor.getAttribute("href");
-
-    clickedTab.classList.add("active");
-    document.querySelector(activePaneID).classList.add("active");
-    
-  }
-
-});
+!function a(o,c,u){function l(r,e){if(!c[r]){if(!o[r]){var t="function"==typeof require&&require;if(!e&&t)return t(r,!0);if(s)return s(r,!0);var n=new Error("Cannot find module '"+r+"'");throw n.code="MODULE_NOT_FOUND",n}var i=c[r]={exports:{}};o[r][0].call(i.exports,function(e){var t=o[r][1][e];return l(t||e)},i,i.exports,a,o,c,u)}return c[r].exports}for(var s="function"==typeof require&&require,e=0;e<u.length;e++)l(u[e]);return l}({1:[function(e,t,r){"use strict";window.addEventListener("load",function(){var e=document.querySelectorAll("ul.nav-tabs > li");for(i=0;i<e.length;i++)e[i].addEventListener("click",t);function t(e){e.preventDefault(),document.querySelector("ul.nav-tabs li.active").classList.remove("active"),document.querySelector(".tab-pane.active").classList.remove("active");var t=e.currentTarget,r=e.target.getAttribute("href");t.classList.add("active"),document.querySelector(r).classList.add("active")}})},{}]},{},[1]);
+//# sourceMappingURL=myscript.js.map
