@@ -88,15 +88,21 @@ class Admin extends BaseController
 
   public function setSettings()
   {
-    $args = array();
+    $args = array(
+      array(
+        'option_group' => 'max_plugin_settings',
+        'option_name' => 'max_plugin',
+        'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
+      )
+    );
 
-    foreach ( $this->managers as $key => $value ) {
+    /* foreach ( $this->managers as $key => $value ) {
       $args[] = array(
         'option_group' => 'max_plugin_settings',
         'option_name' => $key,
         'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
       );
-    }
+    } */
 
     $this->settings->setSettings( $args );
   }
@@ -127,6 +133,7 @@ class Admin extends BaseController
         'page' => 'max_plugin',
         'section' => 'max_admin_index',
         'args' => array(
+          'option_name' => 'max_plugin',
           'label_for' => $key,
           'class' => 'ui-toggle'
         )
