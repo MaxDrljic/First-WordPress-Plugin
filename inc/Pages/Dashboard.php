@@ -12,33 +12,35 @@ use \Inc\Api\Callbacks\ManagerCallbacks;
 /**
  * 
  */
-class Admin extends BaseController
+class Dashboard extends BaseController
 {
   public $settings;
 
   public $callbacks;
+
   public $callbacks_mngr;
 
   public $pages = array();
 
-  public $subpages = array();
+  // public $subpages = array();
 
   public function register() 
   {
     $this->settings = new SettingsApi();
 
     $this->callbacks = new AdminCallbacks();
+
     $this->callbacks_mngr = new ManagerCallbacks();
 
     $this->setPages();
 
-    $this->setSubpages();
+    // $this->setSubpages();
 
     $this->setSettings();
     $this->setSections();
     $this->setFields();
 
-    $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->addSubPages( $this->subpages )->register();
+    $this->settings->addPages( $this->pages )->withSubPage( 'Dashboard' )->register();
   }
 
   public function setPages()
@@ -56,7 +58,7 @@ class Admin extends BaseController
     );
   }
 
-  public function setSubpages()
+  /* public function setSubpages()
   {
     $this->subpages = array(
       array(
@@ -65,7 +67,7 @@ class Admin extends BaseController
         'menu_title' => 'CPT',
         'capability' => 'manage_options',
         'menu_slug' => 'max_cpt',
-        'callback' => function() { echo '<h1>CPT Manager</h1>'; }
+        'callback' => array( $this->callbacks, 'adminCpt' )
       ),
       array(
         'parent_slug' => 'max_plugin',
@@ -84,7 +86,7 @@ class Admin extends BaseController
         'callback' => function() { echo '<h1>Widgets Manager</h1>'; },
       )
     );
-  }
+  } */
 
   public function setSettings()
   {

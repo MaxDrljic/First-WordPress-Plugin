@@ -2,9 +2,9 @@
 /**
   * @package MaxPlugin
   */
-  namespace Inc\Base;
+namespace Inc\Base;
 
-  use \Inc\Base\BaseController;
+use \Inc\Base\BaseController;
 
 /**
  * 
