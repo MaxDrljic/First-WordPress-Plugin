@@ -34,8 +34,6 @@ class Dashboard extends BaseController
 
     $this->setPages();
 
-    // $this->setSubpages();
-
     $this->setSettings();
     $this->setSections();
     $this->setFields();
@@ -58,36 +56,6 @@ class Dashboard extends BaseController
     );
   }
 
-  /* public function setSubpages()
-  {
-    $this->subpages = array(
-      array(
-        'parent_slug' => 'max_plugin',
-        'page_title' => 'Custom Post Types',
-        'menu_title' => 'CPT',
-        'capability' => 'manage_options',
-        'menu_slug' => 'max_cpt',
-        'callback' => array( $this->callbacks, 'adminCpt' )
-      ),
-      array(
-        'parent_slug' => 'max_plugin',
-        'page_title' => 'Custom Taxonomies',
-        'menu_title' => 'Taxonomies',
-        'capability' => 'manage_options',
-        'menu_slug' => 'max_taxonomies',
-        'callback' => function() { echo '<h1>Taxonomies Manager</h1>'; }
-      ),
-      array(
-        'parent_slug' => 'max_plugin',
-        'page_title' => 'Custom Widgets',
-        'menu_title' => 'Widgets',
-        'capability' => 'manage_options',
-        'menu_slug' => 'max_widgets',
-        'callback' => function() { echo '<h1>Widgets Manager</h1>'; },
-      )
-    );
-  } */
-
   public function setSettings()
   {
     $args = array(
@@ -97,14 +65,6 @@ class Dashboard extends BaseController
         'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
       )
     );
-
-    /* foreach ( $this->managers as $key => $value ) {
-      $args[] = array(
-        'option_group' => 'max_plugin_settings',
-        'option_name' => $key,
-        'callback' => array( $this->callbacks_mngr, 'checkboxSanitize' )
-      );
-    } */
 
     $this->settings->setSettings( $args );
   }
