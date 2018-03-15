@@ -19,7 +19,12 @@ class CptCallbacks
 
   public function textField( $args )
   {
-    // return the input
+    $name = $args['label_for'];
+    $option_name = $args['option_name'];
+    $input = get_option( $option_name );
+    $value = $input[$name];
+
+    echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '">';
   }
 
    public function checkboxField( $args )
