@@ -27,10 +27,12 @@
 
           echo "<tr><td>{$option['post_type']}</td><td>{$option['singular_name']}</td><td>{$option['plural_name']}</td><td class=\"text-center\">{$public}</td><td class=\"text-center\">{$archive}</td><td class=\"text-center\"><a href=\"#\">EDIT</a>";
 
-          echo '<form method="post" action="options.php">';
+          echo '<form method="post" action="options.php" class="inline-block">';
           settings_fields( 'max_plugin_cpt_settings' );
-          submit_button( 'Delete', 'delete' );
-
+          echo '<input type="hidden" name="remove" value="'. $option['post_type'] .'">';
+          submit_button( 'Delete', 'delete small', 'submit', false, array(
+            'onclick' => 'return confirm("Are you sure you want to delete this Custom Post Type? The data associated with it will not be deleted.");'
+          ));
           echo '</form></td></tr>';
         }
 
