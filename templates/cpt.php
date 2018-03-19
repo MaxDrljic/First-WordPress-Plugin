@@ -15,13 +15,25 @@
       <h3>Manage your Custom Post Types</h3>
 
       <?php
-        $options = get_option('max_plugin_cpt');
+        
+        $options = get_option( 'max_plugin_cpt' ) ?: array();
+        
 
         echo '<table class="cpt-table"><tr><th>ID</th><th>Singular Name</th><th>Plural Name</th><th>Public</th><th>Archive</th><th>Actions</th></tr>';
 
         foreach ($options as $option) {
-          echo "<tr><td>{$option['post_type']}</td><td>{$option['singular_name']}</td><td>{$option['plural_name']}</td><td class=\"text-center\">{$option['public']}</td><td class=\"text-center\">{$option['has_archive']}</td><td class=\"text-center\"><a href=\"#\">EDIT</a> - <a href=\"#\">DELETE</a></td></tr>";
+          $public = isset($option['public']) ? "TRUE" : "FALSE";
+          $archive = isset($option['has_archive']) ? "TRUE" : "FALSE";
+
+          echo "<tr><td>{$option['post_type']}</td><td>{$option['singular_name']}</td><td>{$option['plural_name']}</td><td class=\"text-center\">{$public}</td><td class=\"text-center\">{$archive}</td><td class=\"text-center\"><a href=\"#\">EDIT</a>";
+
+          echo '<form method="post" action="options.php">';
+          settings_fields( 'max_plugin_cpt_settings' );
+          submit_button( 'Delete', 'delete' );
+
+          echo '</form></td></tr>';
         }
+
         echo '</table>';
         
       ?>

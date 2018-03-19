@@ -49,7 +49,7 @@ class SettingsApi
         'menu_title' => ($title) ? $title : $admin_page['menu_title'],
         'capability' => $admin_page['capability'],
         'menu_slug' => $admin_page['menu_slug'],
-        'callback' => function() { echo '<h1></h1>'; }
+        'callback' => $admin_page['callback']
       )
     );
 

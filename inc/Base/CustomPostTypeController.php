@@ -47,7 +47,7 @@ class CustomPostTypeController extends BaseController
     $this->storeCustomPostTypes();
 
     if ( ! empty( $this->custom_post_types ) ) {
-    add_action( 'init', array( $this, 'registerCustomPostTypes' ) );
+      add_action( 'init', array( $this, 'registerCustomPostTypes' ) );
     }
   }
 
@@ -104,7 +104,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'max_plugin_cpt',
           'label_for' => 'post_type',
-          'placeholder' => 'eg. product'
+          'placeholder' => 'eg. product',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -116,7 +117,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'max_plugin_cpt',
           'label_for' => 'singular_name',
-          'placeholder' => 'eg. Product'
+          'placeholder' => 'eg. Product',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -128,7 +130,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'max_plugin_cpt',
           'label_for' => 'plural_name',
-          'placeholder' => 'eg. Products'
+          'placeholder' => 'eg. Products',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -140,7 +143,8 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'max_plugin_cpt',
           'label_for' => 'public',
-          'class'     => 'ui-toggle'
+          'class' => 'ui-toggle',
+          'array' => 'post_type'
         )
       ),
       array(
@@ -152,9 +156,10 @@ class CustomPostTypeController extends BaseController
         'args' => array(
           'option_name' => 'max_plugin_cpt',
           'label_for' => 'has_archive',
-          'class'     => 'ui-toggle'
+          'class'     => 'ui-toggle',
+          'array' => 'post_type'
         )
-      ),
+      )
     );
 
     $this->settings->setFields( $args );
@@ -162,7 +167,7 @@ class CustomPostTypeController extends BaseController
 
   public function storeCustomPostTypes()
   {
-    $options = get_option('max_plugin_cpt');
+    $options = get_option( 'max_plugin_cpt' ) ?: array();
 
     foreach ($options as $option) {
 
@@ -200,19 +205,19 @@ class CustomPostTypeController extends BaseController
         'supports'              => array( 'title', 'editor', 'thumbnail' ),
         'taxonomies'            => array( 'category', 'post_tag' ),
         'hierarchical'          => false,
-        'public'                => $option['public'],
+        'public'                => isset($option['public']) ?: false,
         'show_ui'               => true,
         'show_in_menu'          => true,
         'menu_position'         => 5,
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
-        'has_archive'           => $option['has_archive'],
+        'has_archive'           => isset($option['has_archive']) ?: false,
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
         'capability_type'       => 'post'
       );
-     }
+    }
   }
 
   public function registerCustomPostTypes()
