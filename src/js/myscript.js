@@ -1,4 +1,8 @@
+import 'code-prettify';
+
 window.addEventListener("load", () => {
+
+  PR.prettyPrint();
 
   // Store tabs variables
   let tabs = document.querySelectorAll("ul.nav-tabs > li");
