@@ -23,6 +23,8 @@ class TestimonialController extends BaseController
     if ( ! $this->activated( 'testimonial_manager' ) ) return;
 
     add_action( 'init', array( $this, 'testimonial_cpt') );
+    add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
+    add_action( 'save_post', array( $this, 'save_meta_box' ) );
   }
 
   public function testimonial_cpt ()
@@ -43,5 +45,58 @@ class TestimonialController extends BaseController
     );
 
     register_post_type( 'testimonial', $args );
+  }
+
+  public function add_meta_boxes()
+  {
+    add_meta_box(
+      'testimonial_author',
+      'Author',
+      array( $this, 'render_author_box' ),
+      'testimonial',
+      'side',
+      'default'
+    );
+
+    // Metabox 2: author email
+
+    // Metabox 3: approved[checkbox]
+
+    // Metabox 4: featured[checkbox]
+  }
+
+  public function render_author_box($post)
+  {
+    wp_nonce_field( 'max_testimonial_author', 'max_testimonial_author_nonce' );
+
+    $value = get_post_meta( $post->ID, '_max_testimonial_author_key', true );
+
+    ?>
+    <label for="max_testimonial_author">Testimonial Author</label>
+    <input type="text" id="max_testimonial_author" name="max_testimonial_author" value="<?php echo esc_attr( $value ) ?>">
+    <?php
+  }
+
+  public function save_meta_box($post_id)
+  {
+    if (! isset($_POST['max_testimonial_author_nonce'])) {
+      return $post_id;
+    }
+
+    $nonce = $_POST['max_testimonial_author_nonce'];
+    if (! wp_verify_nonce( $nonce, 'max_testimonial_author' )) {
+      return $post_id;
+    }
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+      return $post_id;
+    }
+
+    if (! current_user_can( 'edit_post', $post_id ) ) {
+      return $post_id;
+    }
+
+    $data = sanitize_text_field( $_POST['max_testimonial_author'] );
+    update_post_meta( $post_id, '_max_testimonial_author_key', $data );
   }
 }
