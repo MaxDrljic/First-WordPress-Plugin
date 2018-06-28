@@ -42,7 +42,7 @@ class TestimonialController extends BaseController
   {
     // ob_start() tells PHP to read the script, but do not execute the following code.
     ob_start();
-    echo "<link href=\"$this->plugin_url/assets/form.css\"></link>";
+    echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/form.css\" type=\"text/css\" media=\"all\" />";
     require_once( "$this->plugin_path/templates/contact-form.php" );
     echo "<script src=\"$this->plugin_url/src/js/form.js\"></script>";
     return ob_get_clean();
