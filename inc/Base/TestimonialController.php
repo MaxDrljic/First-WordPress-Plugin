@@ -42,9 +42,51 @@ class TestimonialController extends BaseController
 
   public function submit_testimonial()
   {
-   // sanitize the data
-   // store the data into testimonial CPT
-   // send response
+    // sanitize the data
+    $name = sanitize_text_field($_POST['name']);
+    $email = sanitize_email($_POST['email']);
+    $message = sanitize_textarea_field($_POST['message']);
+
+
+    // store the data into testimonial CPT
+    $data = array(
+      'name' => $name,
+      'email' => $email,
+      'approved' => 0,
+      'featured' => 0,
+    );
+
+    $args = array(
+      'post_title'           => 'Testimonial from ' . $name,
+      'post_content'         => $message,
+      'post_author'          => 1,
+      'post_status'          => 'publish',
+      'post_type'            => 'testimonial',
+      'meta_input'           => array(
+        '_max_testimonial_key' => $data
+      )
+    );
+
+    $postID = wp_insert_post($args);
+
+    // send response
+    // Shorthand PHP 7.0+ property, if $postID is true, positive, etc...
+    if ($postID) {
+      $return = array(
+        'status' => 'success',
+        'ID'     => $postID
+      );
+      wp_send_json($return);
+
+      wp_die();
+    }
+
+    // If it is false:
+    $return = array(
+      'status' => 'error',
+    );
+    wp_send_json($return);
+
 
     // Prevent the default 'return 0' of add_action(blabla) methods
     wp_die();
@@ -175,7 +217,7 @@ class TestimonialController extends BaseController
 
     $data = array(
       'name' => sanitize_text_field( $_POST['max_testimonial_author'] ),
-      'email' => sanitize_text_field( $_POST['max_testimonial_email'] ),
+      'email' => sanitize_email( $_POST['max_testimonial_email'] ),
       'approved' => isset($_POST['max_testimonial_approved']) ? 1 : 0,
       'featured' => isset($_POST['max_testimonial_featured']) ? 1 : 0,
     );

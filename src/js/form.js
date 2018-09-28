@@ -50,6 +50,16 @@ document.addEventListener('DOMContentLoaded', function(e) {
       .then(response => {
         resetMessages();
         // deal with the response
+
+        if (response === 0 || response.status === 'error') {
+          testimonialForm.querySelector('.js-form-error').classList('show');
+          return;
+        }
+
+        testimonialForm.querySelector('.js-form-success').classList('show');
+        testimonialForm.querySelector('[name="name"]').value = '';
+        testimonialForm.querySelector('[name="email"]').value = '';
+        testimonialForm.querySelector('[name="message"]').value = '';
       })
 
   });
