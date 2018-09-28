@@ -52,11 +52,11 @@ document.addEventListener('DOMContentLoaded', function(e) {
         // deal with the response
 
         if (response === 0 || response.status === 'error') {
-          testimonialForm.querySelector('.js-form-error').classList('show');
+          testimonialForm.querySelector('.js-form-error').classList.add('show');
           return;
         }
 
-        testimonialForm.querySelector('.js-form-success').classList('show');
+        testimonialForm.querySelector('.js-form-success').classList.add('show');
         testimonialForm.querySelector('[name="name"]').value = '';
         testimonialForm.querySelector('[name="email"]').value = '';
         testimonialForm.querySelector('[name="message"]').value = '';
