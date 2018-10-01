@@ -44,14 +44,15 @@ class TestimonialController extends BaseController
   {
     // sanitize the data
     // DOING_AJAX : Built-in WordPress method to check if we're dealing with Ajax call
-    if (DOING_AJAX) {
+    // check_ajax_referer : built-in WP function, to check the ajax call and the nonce. Returns 1 if positive or -1 if false
+    if (DOING_AJAX || ! check_ajax_referer('testimonial-nonce', 'nonce') ) {
       return $this->return_json('error');
     }
 
     $name = sanitize_text_field($_POST['name']);
     $email = sanitize_email($_POST['email']);
     $message = sanitize_textarea_field($_POST['message']);
-    
+
 
     // store the data into testimonial CPT
     $data = array(

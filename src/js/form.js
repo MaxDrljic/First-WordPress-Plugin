@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function(e) {
     let data = {
       name: testimonialForm.querySelector('[name="name"]').value,
       email: testimonialForm.querySelector('[name="email"]').value,
-      message: testimonialForm.querySelector('[name="message"]').value
+      message: testimonialForm.querySelector('[name="message"]').value,
+      nonce: testimonialForm.querySelector('[name="nonce"]').value
     }
 
     // validate everything
@@ -58,9 +59,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
         // On success, show the success message and reset the values
         testimonialForm.querySelector('.js-form-success').classList.add('show');
-        testimonialForm.querySelector('[name="name"]').value = '';
-        testimonialForm.querySelector('[name="email"]').value = '';
-        testimonialForm.querySelector('[name="message"]').value = '';
+        testimonialForm.reset();
       })
 
   });
