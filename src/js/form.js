@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
           return;
         }
 
+        // On success, show the success message and reset the values
         testimonialForm.querySelector('.js-form-success').classList.add('show');
         testimonialForm.querySelector('[name="name"]').value = '';
         testimonialForm.querySelector('[name="email"]').value = '';

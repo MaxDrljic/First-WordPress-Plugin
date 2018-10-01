@@ -43,10 +43,15 @@ class TestimonialController extends BaseController
   public function submit_testimonial()
   {
     // sanitize the data
+    // DOING_AJAX : Built-in WordPress method to check if we're dealing with Ajax call
+    if (DOING_AJAX) {
+      return $this->return_json('error');
+    }
+
     $name = sanitize_text_field($_POST['name']);
     $email = sanitize_email($_POST['email']);
     $message = sanitize_textarea_field($_POST['message']);
-
+    
 
     // store the data into testimonial CPT
     $data = array(
@@ -72,21 +77,21 @@ class TestimonialController extends BaseController
     // send response
     // Shorthand PHP 7.0+ property, if $postID is true, positive, etc...
     if ($postID) {
-      $return = array(
-        'status' => 'success',
-        'ID'     => $postID
-      );
-      wp_send_json($return);
-
-      wp_die();
+      return $this->return_json('success');
     }
 
-    // If it is false:
-    $return = array(
-      'status' => 'error',
-    );
-    wp_send_json($return);
+    // If there is an error:
+    return $this->return_json('error');
 
+  }
+
+  public function return_json($status)
+  {
+    $return = array(
+      'status' => $status,
+    );
+    
+    wp_send_json($return);
 
     // Prevent the default 'return 0' of add_action(blabla) methods
     wp_die();
