@@ -36,6 +36,7 @@ class TestimonialController extends BaseController
     $this->setShortcodePage();
 
     add_shortcode('testimonial-form', array( $this, 'testimonial_form' ) );
+    add_shortcode('testimonial-slideshow', array( $this, 'testimonial_slideshow' ) );
     add_action('wp_ajax_submit_testimonial', array( $this, 'submit_testimonial' ) );
     add_action('wp_ajax_nopriv_submit_testimonial', array( $this, 'submit_testimonial' ) );
   }
@@ -105,6 +106,16 @@ class TestimonialController extends BaseController
     echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/form.css\" type=\"text/css\" media=\"all\" />";
     require_once( "$this->plugin_path/templates/contact-form.php" );
     echo "<script src=\"$this->plugin_url/src/js/form.js\"></script>";
+    return ob_get_clean();
+  }
+
+  public function testimonial_slideshow()
+  {
+    // ob_start() tells PHP to read the script, but do not execute the following code.
+    ob_start();
+    echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/slider.css\" type=\"text/css\" media=\"all\" />";
+    require_once( "$this->plugin_path/templates/slider.php" );
+    echo "<script src=\"$this->plugin_url/src/js/slider.js\"></script>";
     return ob_get_clean();
   }
 
