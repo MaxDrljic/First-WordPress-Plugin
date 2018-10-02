@@ -105,7 +105,7 @@ class TestimonialController extends BaseController
     ob_start();
     echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/form.css\" type=\"text/css\" media=\"all\" />";
     require_once( "$this->plugin_path/templates/contact-form.php" );
-    echo "<script src=\"$this->plugin_url/src/js/form.js\"></script>";
+    echo "<script src=\"$this->plugin_url/assets/form.js\"></script>";
     return ob_get_clean();
   }
 
@@ -115,7 +115,7 @@ class TestimonialController extends BaseController
     ob_start();
     echo "<link rel=\"stylesheet\" href=\"$this->plugin_url/assets/slider.css\" type=\"text/css\" media=\"all\" />";
     require_once( "$this->plugin_path/templates/slider.php" );
-    echo "<script src=\"$this->plugin_url/src/js/slider.js\"></script>";
+    echo "<script src=\"$this->plugin_url/assets/slider.js\"></script>";
     return ob_get_clean();
   }
 
