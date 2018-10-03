@@ -21,11 +21,14 @@ $args = array(
 $query = new WP_Query( $args );
 
 if ($query->have_posts()) :
-  echo '<ul>';
+  echo '<div class="max-slider--wrapper"><div class="max-slider--container"><div class="max-slider--view"><ul>';
   while ($query->have_posts()) : $query->the_post();
-    echo '<li>'.get_the_title().'<p>'.get_the_content().'</p></li>';
+    // Double question mark syntax: do this if it is exists / true, if not, do that other thing.
+    $name = get_post_meta( get_the_ID(), '_max_testimonial_key', true )['name'] ?? '';
+
+    echo '<li class="max-slider--view__slides"><p class="testimonial-quote">"'.get_the_content().'"</p><p class="testimonial-author">~ '.$name.' ~</p></li>';
   endwhile;
-  echo '</ul>';
+  echo '</ul></div></div></div>';
 endif;
 
 wp_reset_postdata();
