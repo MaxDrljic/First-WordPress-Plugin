@@ -28,7 +28,8 @@ if ($query->have_posts()) :
 
     echo '<li class="max-slider--view__slides"><p class="testimonial-quote">"'.get_the_content().'"</p><p class="testimonial-author">~ '.$name.' ~</p></li>';
   endwhile;
-  echo '</ul></div></div></div>';
+  // Unicode defined in span elements, code can be found on Google
+  echo '</ul></div><div class="max-slider--arrows"><span class="arrow max-slider--arrows__left">&#x3c;</span><span class="arrow max-slider--arrows__right">&#x3e;</span></div></div></div>';
 endif;
 
 wp_reset_postdata();
