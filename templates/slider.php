@@ -21,13 +21,19 @@ $args = array(
 $query = new WP_Query( $args );
 
 if ($query->have_posts()) :
+  $i = 1;
+
   echo '<div class="max-slider--wrapper"><div class="max-slider--container"><div class="max-slider--view"><ul>';
+
   while ($query->have_posts()) : $query->the_post();
     // Double question mark syntax: do this if it is exists / true, if not, do that other thing.
     $name = get_post_meta( get_the_ID(), '_max_testimonial_key', true )['name'] ?? '';
 
-    echo '<li class="max-slider--view__slides"><p class="testimonial-quote">"'.get_the_content().'"</p><p class="testimonial-author">~ '.$name.' ~</p></li>';
+    // Shorthand if statement: ' . (condition) .'
+    echo '<li class="max-slider--view__slides' . ($i === 1 ? ' is-active' : '') . '"><p class="testimonial-quote">"'.get_the_content().'"</p><p class="testimonial-author">~ '.$name.' ~</p></li>';
+    $i++;
   endwhile;
+
   // Unicode defined in span elements, code can be found on Google
   echo '</ul></div><div class="max-slider--arrows"><span class="arrow max-slider--arrows__left">&#x3c;</span><span class="arrow max-slider--arrows__right">&#x3e;</span></div></div></div>';
 endif;
